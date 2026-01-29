@@ -1,4 +1,4 @@
-.PHONY: build test lint fmt fmt-check type-check clean all
+.PHONY: build test lint fmt fmt-check type-check clean all typos
 
 build:
 	python -m build
@@ -22,4 +22,8 @@ clean:
 	rm -rf dist/ build/ *.egg-info .pytest_cache .mypy_cache .ruff_cache
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 
-all: fmt-check lint type-check test
+# Check for typos in source code
+typos:
+	typos
+
+all: fmt-check lint type-check typos test
